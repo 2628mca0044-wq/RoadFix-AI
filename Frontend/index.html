@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadFix AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #b9c9ea;
+            color: #222;
+        }
+
+        header {
+            background: #1a1919;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #1746d1;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #bdeb84;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #1746d1;
+        }
+
+        .login {
+            background: #1746d1;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .hero {
+            padding: 70px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            background: #c7d4f1;
+        }
+
+        .hero-text {
+            width: 55%;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dce6ff;
+            color: #1746d1;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #1746d1;
+        }
+
+        .hero p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .primary {
+            background: #1746d1;
+            color: white;
+        }
+
+        .secondary {
+            background: white;
+            color: #1746d1;
+        }
+
+        .hero-card {
+            width: 35%;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .hero-card p {
+            color: #666;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        .map {
+            height: 150px;
+            margin-top: 20px;
+            background: #dce8d8;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+
+        .stats {
+            background: white;
+            padding: 25px 7%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+        }
+
+        .stat {
+            padding: 10px;
+        }
+
+        .stat h2 {
+            color: #1746d1;
+            margin-bottom: 5px;
+        }
+
+        .stat p {
+            color: #777;
+        }
+
+        .section {
+            padding: 60px 7%;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            color: #777;
+            line-height: 1.5;
+        }
+
+        .cards {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #777;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .card a {
+            background: #1746d1;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .features {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #777;
+            line-height: 1.5;
+        }
+
+        .how {
+            background: #eef3ff;
+        }
+
+        .steps {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .number {
+            width: 40px;
+            height: 40px;
+            background: #1746d1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #777;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: #121a2a;
+            color: white;
+            padding: 40px 7% 20px;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        footer h3 {
+            margin-bottom: 10px;
+        }
+
+        footer p,
+        footer a {
+            color: #aaa;
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        footer a {
+            display: block;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #444;
+            margin-top: 25px;
+            padding-top: 15px;
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        @media(max-width: 800px) {
+
+            .hero {
+                flex-direction: column;
+            }
+
+            .hero-text,
+            .hero-card {
+                width: 100%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .features,
+            .steps,
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .cards,
+            .features,
+            .steps,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            RoadFix <span>AI</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="report.html">Report</a>
+            <a href="track.html">Track Complaint</a>
+            <a href="staff.html">Staff</a>
+            <a href="login.html" class="login">Login</a>
+        </nav>
+
+    </header>
+
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <div class="tag">
+                CIVIC ISSUE REPORTING PLATFORM
+            </div>
+
+            <h1>
+                Report Civic Problems.
+                <br>
+                <span>Track Every Step.</span>
+            </h1>
+
+            <p>
+                RoadFix AI helps citizens report potholes,
+                broken streetlights, drainage problems,
+                garbage and other civic issues with photo,
+                location and description.
+            </p>
+
+            <div class="buttons">
+
+                <a href="report.html" class="btn primary">
+                    Report an Issue
+                </a>
+
+                <a href="track.html" class="btn secondary">
+                    Track Complaint
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <h2>RoadFix AI</h2>
+
+            <p>
+                A simple platform connecting citizens,
+                municipal admins and field staff to
+                manage civic issues.
+            </p>
+
+            <div class="map">
+                🗺️
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="stats">
+
+        <div class="stat">
+            <h2>1,248+</h2>
+            <p>Issues Reported</p>
+        </div>
+
+        <div class="stat">
+            <h2>842</h2>
+            <p>Issues Resolved</p>
+        </div>
+
+        <div class="stat">
+            <h2>286</h2>
+            <p>Issues In Progress</p>
+        </div>
+
+        <div class="stat">
+            <h2>4.7/5</h2>
+            <p>Citizen Rating</p>
+        </div>
+
+    </section>
+
+
+    <section class="section" id="pages">
+
+        <h2>RoadFix AI Pages</h2>
+
+        <p class="intro">
+            These are the main pages of the RoadFix AI
+            civic issue reporting system.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="icon">🔐</div>
+
+                <h3>Login</h3>
+
+                <p>
+                    Login for citizens, administrators
+                    and field staff.
+                </p>
+
+                <a href="login.html">
+                    Open Login
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">📝</div>
+
+                <h3>Registration</h3>
+
+                <p>
+                    Create a new account to report
+                    civic issues.
+                </p>
+
+                <a href="register.html">
+                    Register
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">📍</div>
+
+                <h3>Report Issue</h3>
+
+                <p>
+                    Submit a civic complaint with
+                    photo and location.
+                </p>
+
+                <a href="report.html">
+                    Report Issue
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🔎</div>
+
+                <h3>Track Complaint</h3>
+
+                <p>
+                    Check the current status of
+                    your complaint.
+                </p>
+
+                <a href="track.html">
+                    Track Complaint
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">📊</div>
+
+                <h3>Admin Dashboard</h3>
+
+                <p>
+                    Admin can view, prioritise and
+                    assign reported issues.
+                </p>
+
+                <a href="admin.html">
+                    Open Admin
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">👷</div>
+
+                <h3>Field Staff</h3>
+
+                <p>
+                    Staff can view assigned work and
+                    update issue status.
+                </p>
+
+                <a href="staff.html">
+                    Open Staff
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">📋</div>
+
+                <h3>Complaints</h3>
+
+                <p>
+                    View reported issues and their
+                    current status.
+                </p>
+
+                <a href="complaints.html">
+                    View Complaints
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">⭐</div>
+
+                <h3>Feedback</h3>
+
+                <p>
+                    Citizens can give feedback after
+                    their complaint is resolved.
+                </p>
+
+                <a href="feedback.html">
+                    Give Feedback
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">ℹ️</div>
+
+                <h3>About Project</h3>
+
+                <p>
+                    Learn about RoadFix AI and
+                    its technologies.
+                </p>
+
+                <a href="#features">
+                    View Details
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section" id="features">
+
+        <h2>Key Features</h2>
+
+        <p class="intro">
+            RoadFix AI makes it easier for citizens
+            to report and track civic problems.
+        </p>
+
+        <div class="features">
+
+            <div class="feature">
+
+                <div class="feature-icon">📸</div>
+
+                <h3>Photo Upload</h3>
+
+                <p>
+                    Upload an image of the civic problem.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">📍</div>
+
+                <h3>Location</h3>
+
+                <p>
+                    Add the location of the reported issue.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">🔎</div>
+
+                <h3>Duplicate Check</h3>
+
+                <p>
+                    Check nearby complaints to avoid
+                    repeated reports.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">📊</div>
+
+                <h3>Status Tracking</h3>
+
+                <p>
+                    Citizens can track their complaint
+                    progress.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section how" id="how">
+
+        <h2>How It Works</h2>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="number">1</div>
+
+                <h3>Report</h3>
+
+                <p>
+                    Citizen reports a civic issue.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="number">2</div>
+
+                <h3>Review</h3>
+
+                <p>
+                    Admin reviews and assigns
+                    the complaint.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="number">3</div>
+
+                <h3>Repair</h3>
+
+                <p>
+                    Field staff works on the issue.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="number">4</div>
+
+                <h3>Resolve</h3>
+
+                <p>
+                    Issue is resolved and feedback
+                    can be given.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <div class="footer-main">
+
+            <div>
+
+                <h3>RoadFix AI</h3>
+
+                <p>
+                    Civic Issue Reporting &
+                    Tracking Platform.
+                </p>
+
+                <p>
+                    MCA Front End Web Development Project.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>Quick Links</h3>
+
+                <a href="index.html">Home</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Registration</a>
+                <a href="report.html">Report Issue</a>
+
+            </div>
+
+
+            <div>
+
+                <h3>Project Pages</h3>
+
+                <a href="track.html">Track Complaint</a>
+                <a href="admin.html">Admin Dashboard</a>
+                <a href="staff.html">Staff Panel</a>
+                <a href="feedback.html">Feedback</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 RoadFix AI | MCA Project | KIET
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

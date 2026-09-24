@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report Issue - RoadFix AI</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: #f2f2f2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #0b3d91;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            color: white;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 600px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #0b3d91;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            padding: 11px 20px;
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .location-btn {
+            background-color: green;
+        }
+
+        footer {
+            background-color: #0b3d91;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>RoadFix AI</h2>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="report.html">Report Issue</a>
+            <a href="track.html">Track</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+
+    <div class="container">
+
+        <h2>Report a Civic Issue</h2>
+
+        <p>Report potholes and other problems in your area.</p>
+
+        <form onsubmit="submitComplaint(event)">
+
+            <label>Issue Type</label>
+
+            <select id="issueType" required>
+                <option value="">Select Issue</option>
+                <option value="Pothole">Pothole</option>
+                <option value="Drainage">Drainage Problem</option>
+                <option value="Street Light">Street Light</option>
+                <option value="Garbage">Garbage</option>
+                <option value="Road Damage">Road Damage</option>
+                <option value="Other">Other</option>
+            </select>
+
+
+            <label>Upload Photo</label>
+
+            <input type="file" id="photo" accept="image/*" required>
+
+
+            <label>Location</label>
+
+            <input type="text" id="location" placeholder="Enter location" required>
+
+            <button type="button" class="location-btn" onclick="getLocation()">
+                Use Current Location
+            </button>
+
+            <p id="locationMessage"></p>
+
+
+            <label>Severity</label>
+
+            <select id="severity" required>
+                <option value="">Select Severity</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+
+
+            <label>Description</label>
+
+            <textarea id="description" placeholder="Describe the problem..." required></textarea>
+
+
+            <button type="submit">Submit Complaint</button>
+
+        </form>
+
+    </div>
+
+
+    <footer>
+        <p>© 2026 RoadFix AI | Civic Issue Reporting & Tracking Platform</p>
+    </footer>
+
+
+    <script>
+
+        function getLocation() {
+
+            if (navigator.geolocation) {
+
+                navigator.geolocation.getCurrentPosition(function(position) {
+
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+
+                    document.getElementById("location").value =
+                        latitude + ", " + longitude;
+
+                    document.getElementById("locationMessage").innerHTML =
+                        "Location set successfully.";
+
+                });
+
+            } else {
+                alert("Location is not supported by your browser.");
+            }
+        }
+
+
+        function submitComplaint(event) {
+
+            event.preventDefault();
+
+            let complaintId = "RF-" + Math.floor(1000 + Math.random() * 9000);
+
+            localStorage.setItem("complaintId", complaintId);
+            localStorage.setItem("issue", document.getElementById("issueType").value);
+            localStorage.setItem("location", document.getElementById("location").value);
+            localStorage.setItem("severity", document.getElementById("severity").value);
+            localStorage.setItem("description", document.getElementById("description").value);
+
+            alert("Complaint submitted successfully!\nYour Complaint ID is: " + complaintId);
+
+            window.location.href = "track.html";
+        }
+
+    </script>
+
+</body>
+</html>

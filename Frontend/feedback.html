@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback - RoadFix AI</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: #f2f2f2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #0b3d91;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            color: white;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 650px;
+            margin: 40px auto;
+        }
+
+        .feedback-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #0b3d91;
+        }
+
+        p {
+            color: #444;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .rating {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .rating label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .rating input {
+            width: auto;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 25px;
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #082f70;
+        }
+
+        #message {
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #0b3d91;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto;
+        }
+
+        footer p {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h2>RoadFix AI</h2>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="report.html">Report Issue</a>
+            <a href="track.html">Track</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+    </header>
+
+
+    <div class="container">
+
+        <div class="feedback-box">
+
+            <h2>Give Your Feedback</h2>
+
+            <p>
+                Your complaint has been resolved.
+                Please share your experience with us.
+            </p>
+
+
+            <label>Complaint ID</label>
+
+            <input type="text" id="complaintId" placeholder="Example: RF-1234">
+
+
+            <label>How would you rate our service?</label>
+
+            <div class="rating">
+
+                <label>
+                    <input type="radio" name="rating" value="1">
+                    1
+                </label>
+
+                <label>
+                    <input type="radio" name="rating" value="2">
+                    2
+                </label>
+
+                <label>
+                    <input type="radio" name="rating" value="3">
+                    3
+                </label>
+
+                <label>
+                    <input type="radio" name="rating" value="4">
+                    4
+                </label>
+
+                <label>
+                    <input type="radio" name="rating" value="5">
+                    5
+                </label>
+
+            </div>
+
+
+            <label>Service Experience</label>
+
+            <select id="experience">
+
+                <option value="">Select Experience</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Poor">Poor</option>
+
+            </select>
+
+
+            <label>Your Feedback</label>
+
+            <textarea id="feedback"
+                placeholder="Write your feedback here..."></textarea>
+
+
+            <button onclick="submitFeedback()">
+                Submit Feedback
+            </button>
+
+            <p id="message"></p>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+
+        <p>
+            © 2026 RoadFix AI | Civic Issue Reporting & Tracking Platform
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function submitFeedback() {
+
+            let complaintId =
+                document.getElementById("complaintId").value.trim();
+
+            let rating =
+                document.querySelector('input[name="rating"]:checked');
+
+            let experience =
+                document.getElementById("experience").value;
+
+            let feedback =
+                document.getElementById("feedback").value.trim();
+
+
+            if (complaintId == "") {
+                alert("Please enter Complaint ID.");
+                return;
+            }
+
+            if (rating == null) {
+                alert("Please select a rating.");
+                return;
+            }
+
+            if (experience == "") {
+                alert("Please select your experience.");
+                return;
+            }
+
+            if (feedback == "") {
+                alert("Please write your feedback.");
+                return;
+            }
+
+
+            localStorage.setItem("feedbackComplaintId", complaintId);
+            localStorage.setItem("feedbackRating", rating.value);
+            localStorage.setItem("feedbackExperience", experience);
+            localStorage.setItem("feedbackText", feedback);
+
+
+            document.getElementById("message").innerHTML =
+                "Thank you! Your feedback has been submitted successfully.";
+
+
+            document.getElementById("feedback").value = "";
+
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Track Complaint - RoadFix AI</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: #f2f2f2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #0b3d91;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            color: white;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 650px;
+            margin: 40px auto;
+        }
+
+        .search-box,
+        .status-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #0b3d91;
+        }
+
+        input {
+            width: 70%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 11px 20px;
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #082f70;
+        }
+
+        .complaint {
+            border-left: 4px solid #0b3d91;
+            padding: 12px 20px;
+            margin: 15px 0;
+            background-color: #f5f7fa;
+        }
+
+        .status {
+            color: #0b3d91;
+            font-weight: bold;
+        }
+
+        #message {
+            color: red;
+        }
+
+        .feedback-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feedback-box h3 {
+            color: #0b3d91;
+        }
+
+        footer {
+            background-color: #0b3d91;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h2>RoadFix AI</h2>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="report.html">Report Issue</a>
+            <a href="track.html">Track</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+    </header>
+
+
+    <div class="container">
+
+        <div class="search-box">
+
+            <h2>Track Your Complaint</h2>
+
+            <p>Enter your Complaint ID to check your complaint status.</p>
+
+            <input
+                type="text"
+                id="complaintId"
+                placeholder="Example: RF-1234">
+
+            <button onclick="trackComplaint()">Track</button>
+
+            <p id="message"></p>
+
+        </div>
+
+
+        <div class="status-box" id="result" style="display: none;">
+
+            <h2>Complaint Details</h2>
+
+            <p>
+                <b>Complaint ID:</b>
+                <span id="id"></span>
+            </p>
+
+            <p>
+                <b>Issue:</b>
+                <span id="issue"></span>
+            </p>
+
+            <p>
+                <b>Location:</b>
+                <span id="location"></span>
+            </p>
+
+            <p>
+                <b>Severity:</b>
+                <span id="severity"></span>
+            </p>
+
+            <p>
+                <b>Current Status:</b>
+                <span class="status" id="currentStatus">
+                    Submitted
+                </span>
+            </p>
+
+
+            <div class="complaint">
+
+                <b>1. Complaint Submitted</b>
+
+                <p>
+                    Your complaint has been successfully submitted.
+                </p>
+
+            </div>
+
+
+            <div class="complaint">
+
+                <b>2. Under Review</b>
+
+                <p>
+                    Your complaint will be reviewed by the municipal authority.
+                </p>
+
+            </div>
+
+
+            <div class="complaint">
+
+                <b>3. Assigned</b>
+
+                <p>
+                    Field staff will be assigned to this complaint.
+                </p>
+
+            </div>
+
+
+            <div class="complaint">
+
+                <b>4. In Progress</b>
+
+                <p>
+                    Repair work will be started after assignment.
+                </p>
+
+            </div>
+
+
+            <div class="complaint">
+
+                <b>5. Resolved</b>
+
+                <p>
+                    The complaint will be marked resolved after the issue is fixed.
+                </p>
+
+            </div>
+
+
+            <div
+                class="feedback-box"
+                id="feedbackBox"
+                style="display: none;">
+
+                <h3>Complaint Resolved</h3>
+
+                <p>
+                    Your complaint has been resolved.
+                    Please share your feedback.
+                </p>
+
+                <button onclick="window.location.href='feedback.html'">
+                    Give Feedback
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+
+        <p>
+            © 2026 RoadFix AI | Civic Issue Reporting & Tracking Platform
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function trackComplaint() {
+
+            let enteredId =
+                document.getElementById("complaintId").value.trim();
+
+            let savedId =
+                localStorage.getItem("complaintId");
+
+
+            document.getElementById("message").innerHTML = "";
+
+            document.getElementById("result").style.display = "none";
+
+            document.getElementById("feedbackBox").style.display = "none";
+
+
+            if (enteredId == "") {
+
+                document.getElementById("message").innerHTML =
+                    "Please enter Complaint ID.";
+
+                return;
+            }
+
+
+            if (savedId == null || enteredId != savedId) {
+
+                document.getElementById("message").innerHTML =
+                    "Complaint not found. Please enter a valid Complaint ID.";
+
+                return;
+            }
+
+
+            document.getElementById("id").innerHTML =
+                savedId;
+
+
+            document.getElementById("issue").innerHTML =
+                localStorage.getItem("issue");
+
+
+            document.getElementById("location").innerHTML =
+                localStorage.getItem("location");
+
+
+            document.getElementById("severity").innerHTML =
+                localStorage.getItem("severity");
+
+
+            let status =
+                localStorage.getItem("status");
+
+
+            if (status == "Resolved") {
+
+                document.getElementById("currentStatus").innerHTML =
+                    "Resolved";
+
+                document.getElementById("feedbackBox").style.display =
+                    "block";
+
+            } else {
+
+                document.getElementById("currentStatus").innerHTML =
+                    "Submitted";
+
+            }
+
+
+            document.getElementById("result").style.display =
+                "block";
+        }
+
+    </script>
+
+</body>
+</html>

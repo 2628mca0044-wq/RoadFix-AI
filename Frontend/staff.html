@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RoadFix AI - Staff Panel</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 85%;
+            margin: 40px auto;
+        }
+
+        .title {
+            margin-bottom: 25px;
+        }
+
+        .complaint {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ddd;
+            margin-bottom: 25px;
+        }
+
+        .complaint h3 {
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        .details p {
+            margin: 10px 0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            background: #facc15;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        img {
+            width: 250px;
+            height: 160px;
+            object-fit: cover;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .resolve-box {
+            margin-top: 25px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        button {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #172554;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>RoadFix AI</h2>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Logout</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <h1 class="title">Staff Panel</h1>
+
+    <div class="complaint">
+
+        <h3>Assigned Complaint</h3>
+
+        <div class="details">
+            <p><b>Complaint ID:</b> <span id="complaintId">Loading...</span></p>
+
+            <p><b>Issue:</b> <span id="issue">Loading...</span></p>
+
+            <p><b>Location:</b> <span id="location">Loading...</span></p>
+
+            <p><b>Severity:</b> <span id="severity">Loading...</span></p>
+
+            <p><b>Description:</b> <span id="description">Loading...</span></p>
+
+            <p><b>Status:</b> <span class="status" id="status">Assigned</span></p>
+        </div>
+
+        <div>
+            <p><b>Complaint Photo:</b></p>
+            <img id="complaintPhoto" src="" alt="Complaint Photo">
+        </div>
+
+        <div class="resolve-box">
+
+            <h3>Resolve Complaint</h3>
+
+            <p>Repair complete hone ke baad proof photo upload karein:</p>
+
+            <input type="file" id="repairPhoto" accept="image/*">
+
+            <br>
+
+            <button onclick="resolveComplaint()">
+                Mark as Resolved
+            </button>
+
+            <p id="message"></p>
+
+            <div id="repairPhotoBox"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 RoadFix AI - Civic Issue Reporting & Tracking Platform</p>
+</footer>
+
+<script>
+
+    let complaintId = localStorage.getItem("complaintId");
+    let issue = localStorage.getItem("issue");
+    let locationData = localStorage.getItem("location");
+    let severity = localStorage.getItem("severity");
+    let description = localStorage.getItem("description");
+
+    document.getElementById("complaintId").innerText = complaintId || "No Complaint";
+    document.getElementById("issue").innerText = issue || "Not Available";
+    document.getElementById("location").innerText = locationData || "Not Available";
+    document.getElementById("severity").innerText = severity || "Not Available";
+    document.getElementById("description").innerText = description || "Not Available";
+
+    function resolveComplaint() {
+
+        let file = document.getElementById("repairPhoto").files[0];
+
+        if (!file) {
+            alert("Please upload repair photo first.");
+            return;
+        }
+
+        let reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            localStorage.setItem("repairPhoto", e.target.result);
+            localStorage.setItem("status", "Resolved");
+
+            document.getElementById("status").innerText = "Resolved";
+
+            document.getElementById("message").innerText =
+                "Complaint resolved successfully. Repair photo uploaded.";
+
+            document.getElementById("repairPhotoBox").innerHTML =
+                "<p><b>Repair Proof Photo:</b></p>" +
+                "<img src='" + e.target.result + "'>";
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+</script>
+
+</body>
+</html>
