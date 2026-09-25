@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +8,14 @@
         body {
             margin: 0;
             font-family: Arial;
-            background-color: #f2f2f2;
+            background-color: #f4f8f5;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
         header {
-            background-color: #0b3d91;
+            background-color: #198754;
             padding: 15px 50px;
             display: flex;
             justify-content: space-between;
@@ -32,6 +33,10 @@
             margin-left: 20px;
         }
 
+        nav a:hover {
+            text-decoration: underline;
+        }
+
         .container {
             width: 650px;
             margin: 40px auto;
@@ -41,10 +46,11 @@
             background-color: white;
             padding: 30px;
             border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
-            color: #0b3d91;
+            color: #198754;
         }
 
         p {
@@ -66,6 +72,13 @@
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #198754;
+            outline: none;
         }
 
         textarea {
@@ -91,7 +104,7 @@
         button {
             margin-top: 25px;
             padding: 12px 25px;
-            background-color: #0b3d91;
+            background-color: #198754;
             color: white;
             border: none;
             cursor: pointer;
@@ -99,17 +112,17 @@
         }
 
         button:hover {
-            background-color: #082f70;
+            background-color: #146c43;
         }
 
         #message {
-            color: green;
+            color: #198754;
             font-weight: bold;
             margin-top: 20px;
         }
 
         footer {
-            background-color: #0b3d91;
+            background-color: #198754;
             color: white;
             text-align: center;
             padding: 15px;
@@ -282,3 +295,4 @@
 
 </body>
 </html>
+```
